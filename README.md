@@ -1,75 +1,54 @@
-# Getting Started with Create React App
+## Instructions
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+u need to add your books first so u can see some books being added to your shelfs.
+to find a specific book u can search for it by clicking on the plus icon on the bottom-right sector of the main page.
 
+## Important
 
-## How to start
+The backend API uses a fixed set of cached search results and is limited to a particular set of search terms, which can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md). That list of terms are the _only_ terms that will work with the backend, so don't be surprised if your searches for Basket Weaving or Bubble Wrap don't come back with any results.
 
-To get started developing right away:
+## Added functions 
+u can find additional functions being added to the bookAPI.js file:
 
-- install all project dependencies with `npm install`
-- start the development server with `npm start`
+- [`handlePost`](#handlepost)
+- [`deleted`](#deleted)
 
-## Available Scripts
+### `handlePost`
 
-In the project directory, you can run:
+Method Signature:
 
-### `npm test`
+```js
+handlePost(item, bookshelf, disabled);
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-item: `<Object>`
+-bookshelf: `<String>`
+-disabled: `<String>`
+-Posting data to the back-end server and modifying the ui
+-item refers to the book object, bookshelf stands for the shelf where u want to put the book, disabled refers to where did u picked the book up from
 
-### `npm run build`
+### `deleted`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Method Signature:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```js
+deleted(book, disabled);
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-bookshelf: `<String>`
+-disabled: `<String>`
+-delete the book data from the server and move it out of the shelf that was containing it
+-item refers to the book object, disabled refers to where did u picked the book up from
 
-### `npm run eject`
+## Backend Server
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [`getAll`](#getall)
+- [`update`](#update)
+- [`search`](#search)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-## What You're Getting
+## What You're Getting (updated)
 
 ```bash
 ├── CONTRIBUTING.md
@@ -102,82 +81,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
     ├── index.css # Global styles. You probably won't need to change anything here.
     └── index.js # You should not need to modify this file. It is used for DOM rendering only.
 ```
-
-## Important
-
-The backend API uses a fixed set of cached search results and is limited to a particular set of search terms, which can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md). That list of terms are the _only_ terms that will work with the backend, so don't be surprised if your searches for Basket Weaving or Bubble Wrap don't come back with any results.
-
-## Backend Server
-
-To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
-
-- [`getAll`](#getall)
-- [`update`](#update)
-- [`search`](#search)
-
-### `getAll`
-
-Method Signature:
-
-```js
-getAll();
-```
-
-- Returns a Promise which resolves to a JSON object containing a collection of book objects.
-- This collection represents the books currently in the bookshelves in your app.
-
-### `update`
-
-Method Signature:
-
-```js
-update(book, shelf);
-```
-
-- book: `<Object>` containing at minimum an `id` attribute
-- shelf: `<String>` contains one of ["wantToRead", "currentlyReading", "read"]
-- Returns a Promise which resolves to a JSON object containing the response data of the POST request
-
-### `search`
-
-Method Signature:
-
-```js
-search(query);
-```
-
-- query: `<String>`
-- Returns a Promise which resolves to a JSON object containing a collection of a maximum of 20 book objects.
-- These books do not know which shelf they are on. They are raw results only. You'll need to make sure that books have the correct state while on the search page.
-
-### `handlePost`
-
-Method Signature:
-
-```js
-handlePost(item, bookshelf, disabled);
-```
-
--item: `<Object>`
--bookshelf: `<String>`
--disabled: `<String>`
--Posting data to the back-end server and modifying the ui
--item refers to the book object, bookshelf stands for the shelf where u want to put the book, disabled refers to where did u picked the book up from
-
-### `deleted`
-
-Method Signature:
-
-```js
-deleted(book, disabled);
-```
-
--bookshelf: `<String>`
--disabled: `<String>`
--delete the book data from the server and move it out of the shelf that was containing it
--item refers to the book object, disabled refers to where did u picked the book up from
-
-## components
-
-this project has shared components like the book component u can find it in the shared folder.
-There is also components representing the three shelfs ( currentlyReading - wantToRead - read), a component for each shelf.

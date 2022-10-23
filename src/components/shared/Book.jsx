@@ -1,10 +1,5 @@
-import { useContext } from 'react'
-import BookContext from '../../context/BookContext'
 
-function Book({item, disabled}) {
-
-    // taking the delete function and the data posting one from the context component
-    const {handlePost, deleted} = useContext(BookContext)
+function Book({item, disabled, handlePost, deleted}) {
     
     const handle = (e) => {
         handlePost(item, e.currentTarget.value, disabled)
@@ -32,7 +27,7 @@ function Book({item, disabled}) {
                         </option>
                         <option value="wantToRead" disabled= {'wantToRead' === `${disabled}`}>Want to Read</option>
                         <option value="read" disabled= {'read' === `${disabled}`}>Read</option>
-                        <option value="none" >None</option>
+                        <option value="none" disabled= {'none' === `${disabled}`} >None</option>
                     </select>
                 </div>
             </div>

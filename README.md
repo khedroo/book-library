@@ -1,3 +1,23 @@
+## Installation and Setup Instructions
+
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
+
+### Installation:
+
+`npm install`
+
+To Run Test Suite:  
+
+`npm test`  
+
+To Start Server:
+
+`npm start`  
+
+To Visit App:
+
+`localhost:3000` 
+
 ## Instructions
 
 u need to add your books first so u can see some books being added to your shelfs.
